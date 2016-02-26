@@ -258,11 +258,13 @@ export default class Draggable extends React.Component {
     };
 
     // If this element was SVG, we use the `transform` attribute.
+    /*
     if (this.state.isElementSVG) {
       svgTransform = createSVGTransform(transformOpts);
     } else {
       style = createCSSTransform(transformOpts);
     }
+    */
 
     // zIndex option
     if (this.state.dragging && !isNaN(this.props.zIndex)) {
