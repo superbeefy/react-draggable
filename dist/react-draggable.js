@@ -236,27 +236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var style = {},
-	          svgTransform = null;
-	
-	      // Add a CSS transform to move the element around. This allows us to move the element around
-	      // without worrying about whether or not it is relatively or absolutely positioned.
-	      // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
-	      // has a clean slate.
-	      var transformOpts = {
-	        // Set left if horizontal drag is enabled
-	        x: (0, _positionFns.canDragX)(this) ? this.state.clientX : this.props.start.x,
-	
-	        // Set top if vertical drag is enabled
-	        y: (0, _positionFns.canDragY)(this) ? this.state.clientY : this.props.start.y
-	      };
-	
-	      // If this element was SVG, we use the `transform` attribute.
-	      if (this.state.isElementSVG) {
-	        svgTransform = (0, _domFns.createSVGTransform)(transformOpts);
-	      } else {
-	        style = (0, _domFns.createCSSTransform)(transformOpts);
-	      }
+	      var style = {};
 	
 	      // zIndex option
 	      if (this.state.dragging && !isNaN(this.props.zIndex)) {
@@ -276,8 +256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _extends({}, this.props, { onStart: this.onDragStart, onDrag: this.onDrag, onStop: this.onDragStop }),
 	        _react2.default.cloneElement(_react2.default.Children.only(this.props.children), {
 	          className: className,
-	          style: _extends({}, this.props.children.props.style, style),
-	          transform: svgTransform
+	          style: _extends({}, this.props.children.props.style, style)
 	        })
 	      );
 	    }
@@ -409,8 +388,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
@@ -422,7 +401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var hasOwn = {}.hasOwnProperty;
 	
 		function classNames () {
-			var classes = '';
+			var classes = [];
 	
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -431,28 +410,28 @@ return /******/ (function(modules) { // webpackBootstrap
 				var argType = typeof arg;
 	
 				if (argType === 'string' || argType === 'number') {
-					classes += ' ' + arg;
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
+					classes.push(classNames.apply(null, arg));
 				} else if (argType === 'object') {
 					for (var key in arg) {
 						if (hasOwn.call(arg, key) && arg[key]) {
-							classes += ' ' + key;
+							classes.push(key);
 						}
 					}
 				}
 			}
 	
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 	
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
 		} else if (true) {
 			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
