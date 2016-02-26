@@ -239,32 +239,7 @@ export default class Draggable extends React.Component {
   };
 
   render(): ReactElement {
-    let style = {}, svgTransform = null;
-
-    // Add a CSS transform to move the element around. This allows us to move the element around
-    // without worrying about whether or not it is relatively or absolutely positioned.
-    // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
-    // has a clean slate.
-    const transformOpts = {
-      // Set left if horizontal drag is enabled
-      x: canDragX(this) ?
-        this.state.clientX :
-        this.props.start.x,
-
-      // Set top if vertical drag is enabled
-      y: canDragY(this) ?
-        this.state.clientY :
-        this.props.start.y
-    };
-
-    // If this element was SVG, we use the `transform` attribute.
-    /*
-    if (this.state.isElementSVG) {
-      svgTransform = createSVGTransform(transformOpts);
-    } else {
-      style = createCSSTransform(transformOpts);
-    }
-    */
+    let style = {};
 
     // zIndex option
     if (this.state.dragging && !isNaN(this.props.zIndex)) {
@@ -283,8 +258,7 @@ export default class Draggable extends React.Component {
       <DraggableCore {...this.props} onStart={this.onDragStart} onDrag={this.onDrag} onStop={this.onDragStop}>
         {React.cloneElement(React.Children.only(this.props.children), {
           className: className,
-          style: {...this.props.children.props.style, ...style},
-          transform: svgTransform
+          style: {...this.props.children.props.style, ...style}
         })}
       </DraggableCore>
     );
